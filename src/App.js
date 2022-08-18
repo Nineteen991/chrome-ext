@@ -28,11 +28,11 @@ const TopRow = styled.div`
 
 export default function App() {
   // don't use my unsplash access key; I only get so many api calls / hour
-  // const accessKey = "ITbWLmIlf-GE-svaxX4EHLdbAyQV1YsWcp3uyNYSGO8"
-  // const photosUrl = `https://api.unsplash.com/photos/random?orientation=landscape&query=nature&client_id=${accessKey}`
+  const accessKey = "ITbWLmIlf-GE-svaxX4EHLdbAyQV1YsWcp3uyNYSGO8"
+  const photosUrl = `https://api.unsplash.com/photos/random?orientation=landscape&query=nature&client_id=${accessKey}`
 
   // to prevent rate limiting with the unsplash api
-  const photosUrl = 'https://apis.scrimba.com/unsplash/photos/random?orientation=landscape&query=nature'
+  // const photosUrl = 'https://apis.scrimba.com/unsplash/photos/random?orientation=landscape&query=nature'
   
   const containerBg = document.getElementById('container')
 

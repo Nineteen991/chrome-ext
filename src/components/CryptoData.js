@@ -41,10 +41,28 @@ const CryptoH1 = styled.h1`
   text-shadow: 1px 1px black;
 `
 
+const CryptoBottom = styled.div`
+  margin-top: 1rem;
+  height: 4rem;
+  display: flex;
+  flex-direction: column;
+`
+
+const CryptoH2 = styled.h2`
+  color: white;
+  text-shadow: 1px 1px black;
+  font-style: italic;
+`
+
+const Note = styled.p`
+  margin-top: 1rem;
+  color: #eee;
+`
+
 export default function CryptoData() {
   const [inputValue, setInputValue] = useState('')
   const [submitValue, setSubmitValue] = useState('')
-  const [cryptocurrency, setCryptocurrency] = useState({})
+  const [cryptocurrency, setCryptocurrency] = useState(null)
 
   function getCryptocurrency(e) {
     e.preventDefault()
@@ -56,23 +74,59 @@ export default function CryptoData() {
   useEffect(() => {
     const coinGeckoUrl = `https://api.coingecko.com/api/v3/coins/${submitValue}`
 
+    const cryptoInfo = data => {
+      return (
+        <>
+          <CryptoMiddle>
+            <CryptoIcon src={data.image.small} />
+            <CryptoH1>{data.name}</CryptoH1>
+          </CryptoMiddle>
+          <CryptoBottom>
+            <CryptoH2>
+              Market Cap: {
+                data.market_data.market_cap.usd.toLocaleString("en-US", {
+                  style: "currency", 
+                  currency: "USD", 
+                  maximumFractionDigits: 0
+                })
+              }
+            </CryptoH2>
+            <CryptoH2>
+              24 Hour High: {
+                data.market_data.high_24h.usd.toLocaleString("en-US", {
+                  style: "currency", 
+                  currency: "USD", 
+                  maximumFractionDigits: 8
+                })
+              }
+            </CryptoH2>
+            <CryptoH2>
+              24 Hour Low: {
+                data.market_data.low_24h.usd.toLocaleString("en-US", {
+                  style: "currency", 
+                  currency: "USD", 
+                  maximumFractionDigits: 8
+                })
+              }
+            </CryptoH2>
+          </CryptoBottom>
+        </>
+      )
+    }
+
     fetch(coinGeckoUrl)
       .then(res => {
-        if (!res) {
+        if (!res.ok) {
           throw Error('Failed to fetch cryptocurrency')
-        }
+        } 
         return res.json()
       })
       .then(data => {
-        console.log(data)
         if(data.length > 1) {
-          setCryptocurrency(() => (
-            <CryptoMiddle>
-              <CryptoIcon src={data[0].image.small} />
-              <CryptoH1>{data[0].name}</CryptoH1>
-            </CryptoMiddle>
-          ))
-        }
+          setCryptocurrency(() => cryptoInfo(data[0]))
+        } else if (data) {
+          setCryptocurrency(() => cryptoInfo(data))
+        } 
       })
       .catch(err => console.log(err))
   }, [submitValue])
@@ -88,6 +142,11 @@ export default function CryptoData() {
           />
           <CryptoBtn>Search</CryptoBtn>
         </form>
+
+        <Note>
+          Note: for crypto names that are longer than 1 word, you 
+          may need to either use a - or combine into 1 word
+        </Note>
 
         {cryptocurrency}        
 
