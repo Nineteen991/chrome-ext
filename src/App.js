@@ -4,6 +4,8 @@ import styled from 'styled-components'
 import GlobalStyle from './styles/GlobalStyle'
 import defaultBg from './images/Calm-Desktop-Wallpaper.jpg'
 import CryptoData from './components/CryptoData'
+import WeatherData from './components/WeatherData'
+import BoredBot from './components/BoredBot'
 
 const Container = styled.div`
   height: 100vh;
@@ -18,21 +20,31 @@ const Container = styled.div`
   
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+
+  @media (max-width: 60rem) {
+    align-items: center;
+  }
 `
 
 const TopRow = styled.div`
   display: flex;
   justify-content: space-between;
-  align-items: center;
+
+  @media (max-width: 60rem) {
+    height: 60vh;
+    flex-direction: column;
+    align-items: center;
+  }
 `
 
 export default function App() {
   // don't use my unsplash access key; I only get so many api calls / hour
-  const accessKey = "ITbWLmIlf-GE-svaxX4EHLdbAyQV1YsWcp3uyNYSGO8"
-  const photosUrl = `https://api.unsplash.com/photos/random?orientation=landscape&query=nature&client_id=${accessKey}`
+  // const accessKey = "ITbWLmIlf-GE-svaxX4EHLdbAyQV1YsWcp3uyNYSGO8"
+  // const photosUrl = `https://api.unsplash.com/photos/random?orientation=landscape&query=nature&client_id=${accessKey}`
 
   // to prevent rate limiting with the unsplash api
-  // const photosUrl = 'https://apis.scrimba.com/unsplash/photos/random?orientation=landscape&query=nature'
+  const photosUrl = 'https://apis.scrimba.com/unsplash/photos/random?orientation=landscape&query=nature'
   
   const containerBg = document.getElementById('container')
 
@@ -40,7 +52,6 @@ export default function App() {
   useEffect(() => {
     fetch(photosUrl)
       .then(res => {
-        console.log(res)
         if (!res.ok) {
           throw Error("Unsplash api fetch failed")
         }
@@ -53,15 +64,17 @@ export default function App() {
       .catch(err => {
         console.log(err) 
       })
-  }, [])
+  }, [photosUrl, containerBg]) 
 
   return (
     <>
       <GlobalStyle />
-      <Container id="container">
+      <Container id='container'>
         <TopRow>
           <CryptoData />
+          <WeatherData />
         </TopRow>
+        <BoredBot />
       </Container>
     </>
   )

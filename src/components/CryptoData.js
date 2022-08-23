@@ -5,9 +5,12 @@ import searchIcon from '../images/Icon.png'
 
 const CryptoDiv = styled.div`
   margin: 1rem;
-  width: 20%;
+  width: 50%;
   display: flex;
   flex-direction: column;
+  @media(max-width: 60rem) {
+    width: 80%;
+  }
 `
 
 const CryptoInput = styled.input`
@@ -71,48 +74,48 @@ export default function CryptoData() {
     e.target.reset()
   }
 
+  const cryptoInfo = data => {
+    return (
+      <>
+        <CryptoMiddle>
+          <CryptoIcon src={data.image.small} />
+          <CryptoH1>{data.name}</CryptoH1>
+        </CryptoMiddle>
+        <CryptoBottom>
+          <CryptoH2>
+            Market Cap: {
+              data.market_data.market_cap.usd.toLocaleString("en-US", {
+                style: "currency", 
+                currency: "USD", 
+                maximumFractionDigits: 0
+              })
+            }
+          </CryptoH2>
+          <CryptoH2>
+            24 Hour High: {
+              data.market_data.high_24h.usd.toLocaleString("en-US", {
+                style: "currency", 
+                currency: "USD", 
+                maximumFractionDigits: 8
+              })
+            }
+          </CryptoH2>
+          <CryptoH2>
+            24 Hour Low: {
+              data.market_data.low_24h.usd.toLocaleString("en-US", {
+                style: "currency", 
+                currency: "USD", 
+                maximumFractionDigits: 8
+              })
+            }
+          </CryptoH2>
+        </CryptoBottom>
+      </>
+    )
+  }
+
   useEffect(() => {
     const coinGeckoUrl = `https://api.coingecko.com/api/v3/coins/${submitValue}`
-
-    const cryptoInfo = data => {
-      return (
-        <>
-          <CryptoMiddle>
-            <CryptoIcon src={data.image.small} />
-            <CryptoH1>{data.name}</CryptoH1>
-          </CryptoMiddle>
-          <CryptoBottom>
-            <CryptoH2>
-              Market Cap: {
-                data.market_data.market_cap.usd.toLocaleString("en-US", {
-                  style: "currency", 
-                  currency: "USD", 
-                  maximumFractionDigits: 0
-                })
-              }
-            </CryptoH2>
-            <CryptoH2>
-              24 Hour High: {
-                data.market_data.high_24h.usd.toLocaleString("en-US", {
-                  style: "currency", 
-                  currency: "USD", 
-                  maximumFractionDigits: 8
-                })
-              }
-            </CryptoH2>
-            <CryptoH2>
-              24 Hour Low: {
-                data.market_data.low_24h.usd.toLocaleString("en-US", {
-                  style: "currency", 
-                  currency: "USD", 
-                  maximumFractionDigits: 8
-                })
-              }
-            </CryptoH2>
-          </CryptoBottom>
-        </>
-      )
-    }
 
     fetch(coinGeckoUrl)
       .then(res => {
@@ -137,8 +140,9 @@ export default function CryptoData() {
         <form onSubmit={e => getCryptocurrency(e)}>
           <CryptoInput 
             placeholder='Search a cryptocurrency'
-            name='crypto-input'
+            name='cryptoInput'
             onChange={e => setInputValue(e.target.value)}
+            value={inputValue}
           />
           <CryptoBtn>Search</CryptoBtn>
         </form>
