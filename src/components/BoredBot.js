@@ -4,6 +4,7 @@ import styled from 'styled-components'
 const BoredDiv = styled.div`
   align-self: flex-end;
   padding: 3rem;
+  text-shadow: 1px 1px black;
 
   display: flex;
   flex-direction: column;
