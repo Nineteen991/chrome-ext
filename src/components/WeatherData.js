@@ -53,6 +53,7 @@ export default function WeatherData() {
             </WeatherDiv>
           ))
         })
+        .catch(error => console.log(error))
     })
   }, [])
 

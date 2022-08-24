@@ -45,21 +45,31 @@ export default function BoredBot() {
   useEffect(() => {
     if (goFetch) {
       fetch("http://www.boredapi.com/api/activity")
-      .then(res => {
-        if(!res.ok) {
-          throw Error('Bored Bot Broken')
-        }
-        return res.json()
-      })
-      .then(data => {
-        setMessage(
-          <>
-            <h1>🤖 Not so BoredBot 🤖</h1>
-            <BoredActivity>{data.activity}</BoredActivity>
-          </>
-        )
-        setGoFetch(false)
-      })
+        .then(res => {
+          console.log(res)
+          if(!res.ok) {
+            throw Error('Bored Bot Broken')
+          }
+          return res.json()
+        })
+        .then(data => {
+          setMessage(
+            <>
+              <h1>🤖 Not so BoredBot 🤖</h1>
+              <BoredActivity>{data.activity}</BoredActivity>
+            </>
+          )
+          setGoFetch(false)
+        })
+        .catch(error => {
+          console.error(error)
+          setMessage(
+            <>
+              <h1>🤖 BoredBot 🤖</h1>
+              <BoredActivity>Need to Fix BoredBot</BoredActivity>
+            </>
+          )
+        })
     }
   }, [goFetch])
 
