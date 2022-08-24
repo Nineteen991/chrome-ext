@@ -91,6 +91,17 @@ export default function CryptoData() {
               })
             }
           </CryptoH2>
+
+          <CryptoH2>
+            Price: {
+              data.market_data.current_price.usd.toLocaleString("en-US", {
+                style: "currency",
+                currency: "USD",
+                maximumFractionDigits: 8
+              })
+            }
+          </CryptoH2>
+
           <CryptoH2>
             24 Hour High: {
               data.market_data.high_24h.usd.toLocaleString("en-US", {
@@ -100,6 +111,7 @@ export default function CryptoData() {
               })
             }
           </CryptoH2>
+          
           <CryptoH2>
             24 Hour Low: {
               data.market_data.low_24h.usd.toLocaleString("en-US", {
@@ -129,6 +141,7 @@ export default function CryptoData() {
           setCryptocurrency(() => cryptoInfo(data[0]))
         } else if (data) {
           setCryptocurrency(() => cryptoInfo(data))
+          console.log(data)
         } 
       })
       .catch(err => console.log(err))
