@@ -111,7 +111,7 @@ export default function CryptoData() {
               })
             }
           </CryptoH2>
-          
+
           <CryptoH2>
             24 Hour Low: {
               data.market_data.low_24h.usd.toLocaleString("en-US", {
@@ -141,7 +141,6 @@ export default function CryptoData() {
           setCryptocurrency(() => cryptoInfo(data[0]))
         } else if (data) {
           setCryptocurrency(() => cryptoInfo(data))
-          console.log(data)
         } 
       })
       .catch(err => console.log(err))
