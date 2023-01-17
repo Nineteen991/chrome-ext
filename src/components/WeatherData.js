@@ -7,18 +7,15 @@ const WeatherDiv = styled.div`
   text-shadow: 1px 1px black;
   font-size: 2rem;
 `
-
 const Toprow = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
 `
-
 const WeatherIcon = styled.img`
   height: 4rem;
   width: 4rem;
 `
-
 const WeatherType = styled.div`
   text-align: center;
   padding: 0 1rem;

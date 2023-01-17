@@ -26,7 +26,6 @@ const Container = styled.div`
     align-items: center;
   }
 `
-
 const TopRow = styled.div`
   display: flex;
   justify-content: space-between;
@@ -39,14 +38,14 @@ const TopRow = styled.div`
 `
 
 export default function App() {
-  const photosUrl = 'https://apis.scrimba.com/unsplash/photos/random?orientation=landscape&query=nature'
+  const photosUrl = 'https://api.unsplash.com/photos/random?orientation=landscape&query=nature&client_id=ITbWLmIlf-GE-svaxX4EHLdbAyQV1YsWcp3uyNYSGO8'
   
   const containerBg = document.getElementById('container')
 
-  // get backgrounds from unsplash api
   useEffect(() => {
     fetch(photosUrl)
       .then(res => {
+        console.log(res)
         if (!res.ok) {
           throw Error("Unsplash api fetch failed")
         }

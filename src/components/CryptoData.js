@@ -8,11 +8,10 @@ const CryptoDiv = styled.div`
   width: 50%;
   display: flex;
   flex-direction: column;
-  @media(max-width: 60rem) {
+  @media (max-width: 60rem) {
     width: 80%;
   }
 `
-
 const CryptoInput = styled.input`
   height: 4rem;
   width: 60%;
@@ -22,41 +21,38 @@ const CryptoInput = styled.input`
   outline: none;
   border-radius: 1rem 0 0 1rem;
 `
-
 const CryptoBtn = styled.button`
   padding: 1rem 2rem;
   border-radius: 0 1rem 1rem 0;
 `
-
 const CryptoMiddle = styled.div`
   margin-top: 1rem;
   height: 4rem;
   display: flex;
-`
 
+  @media (min-width: 60rem) {
+    margin-top: 3rem
+  }
+`
 const CryptoIcon = styled.img`
   height: 4rem;
   margin-right: 1rem;
 `
-
 const CryptoH1 = styled.h1`
   color: white;
   text-shadow: 1px 1px black;
 `
-
 const CryptoBottom = styled.div`
   margin-top: 1rem;
   height: 4rem;
   display: flex;
   flex-direction: column;
 `
-
 const CryptoH2 = styled.h2`
   color: white;
   text-shadow: 1px 1px black;
   font-style: italic;
 `
-
 const Note = styled.p`
   margin-top: 1rem;
   color: #eee;

@@ -15,11 +15,9 @@ const BoredDiv = styled.div`
     align-self: center;
   }
 `
-
 const BoredActivity = styled.h4`
   margin: 1rem 0;
 `
-
 const BoredBtn = styled.button`
   height: 100px;
   width: 100px;
